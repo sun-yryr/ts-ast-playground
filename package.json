@@ -1,0 +1,40 @@
+{
+  "name": "source2source-using-ast",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "engines": {
+    "node": "^20",
+    "pnpm": "^9"
+  },
+  "packageManager": "pnpm@9.1.1",
+  "type": "module",
+  "scripts": {
+    "check": "biome check src",
+    "fix": "biome check --apply-unsafe src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@oclif/core": "^3.26.6",
+    "glob": "^10.3.15",
+    "ts-morph": "^22.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.7.3",
+    "@tsconfig/node20": "^20.1.4",
+    "@types/node": "^20.12.12",
+    "tsx": "^4.10.5",
+    "typescript": "^5.4.5"
+  },
+  "bin": {
+    "ast2": "./bin/run.js"
+  },
+  "oclif": {
+    "bin": "ast2",
+    "commands": "./dist/commands",
+    "dirname": "ast2",
+    "topicSeparator": " "
+  }
+}
