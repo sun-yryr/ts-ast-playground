@@ -12,7 +12,7 @@ export default class Csf3Morph extends Command {
   };
 
   static override description =
-    "storybookのマイグレーションで出てきたCSF3をいい感じに変換するやつ";
+    "storybookのマイグレーションで出てきたCSF3に型定義を追加する";
 
   static override examples = [
     '$ csf3-morph --tsConfigPath="tsconfig.json" "packages/ui/stories/**/*.tsx"',
@@ -46,6 +46,11 @@ export default class Csf3Morph extends Command {
 }
 
 export function transformSourceFile(sourceFile: SourceFile) {
+  if (sourceFile.getExportAssignments().length !== 1) {
+    console.log("複数の default export があるため、変換をスキップします。");
+    console.log("csf3-morph-2 を試してみてください。");
+    return;
+  }
   // Meta, StoryObj のインポートを追加
   const importDeclaration = sourceFile.getImportDeclaration(
     (declaration) =>
@@ -90,7 +95,7 @@ export function transformSourceFile(sourceFile: SourceFile) {
     defaultExpr.replaceWithText("meta");
   }
 
-  // export const の型パラメータ追加
+  // export const の型パラメータ��加
   const exportConsts = sourceFile
     .getVariableStatements()
     .filter((statement) => statement.isExported());
